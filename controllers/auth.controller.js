@@ -114,7 +114,7 @@ export const loginController = async (req, res) => {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 2 * 1000,
       sameSite: "strict",
-      secure: process.env.NODE_ENV === "development" ? false : true,
+      secure: true,
     };
 
     return res
@@ -158,12 +158,12 @@ export const logoutController = async (req, res) => {
       .clearCookie("accessToken", {
         httpOnly: true,
         sameSite: "strict",
-        secure: process.env.NODE_ENV === "development" ? false : true,
+        secure: true,
       })
       .clearCookie("refreshToken", {
         httpOnly: true,
         sameSite: "strict",
-        secure: process.env.NODE_ENV === "development" ? false : true,
+        secure: true,
       })
       .json({ status: 200, message: "Logged out successfully" });
   } catch (error) {
@@ -198,7 +198,7 @@ export const refreshTokenController = async (req, res) => {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 10 * 1000,
       sameSite: "strict",
-      secure: process.env.NODE_ENV === "development" ? false : true,
+      secure: true,
     };
 
     res
