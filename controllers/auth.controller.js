@@ -124,6 +124,7 @@ export const loginController = async (req, res) => {
       .json({
         status: 200,
         user: isUserExist,
+          success: true,
         accessToken,
         message: "User logged In Successfully",
       });
