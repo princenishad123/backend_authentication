@@ -113,7 +113,7 @@ export const loginController = async (req, res) => {
     const options = {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 2 * 1000,
-      sameSite: "strict",
+      sameSite: "none",
       secure: true,
     };
 
@@ -158,12 +158,12 @@ export const logoutController = async (req, res) => {
       .status(200)
       .clearCookie("accessToken", {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         secure: true,
       })
       .clearCookie("refreshToken", {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         secure: true,
       })
       .json({ status: 200, message: "Logged out successfully" });
@@ -198,7 +198,7 @@ export const refreshTokenController = async (req, res) => {
     const options = {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 10 * 1000,
-      sameSite: "strict",
+      sameSite: "none",
       secure: true,
     };
 
