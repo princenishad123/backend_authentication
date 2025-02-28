@@ -28,6 +28,12 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: 6,
     },
+
+    iAm: {
+        type: String,
+        requried: true,
+        trim:true
+    },
         
     role: {
             type: String,

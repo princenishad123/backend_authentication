@@ -32,9 +32,11 @@ app.use(helmet());
 
 // import all routes here;
 import authRoute from "../routes/authRoute.js";
+import appointmentRoute from "../routes/appointmentRoute.js";
 
 // route middlewares
-app.use('/api/v1/auth',authRoute)
+app.use('/api/v1/auth', authRoute)
+app.use('/api/v1/appointment', appointmentRoute)
 
 // Start Server
 app.listen(PORT, () => {

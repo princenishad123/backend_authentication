@@ -1,4 +1,5 @@
 import User from "../models/user.schema.js";
+import Doctor from "../models/doctor.schema.js";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken";
 config();
@@ -24,7 +25,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 // Sign-up Controller
 export const signConroller = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,iAm } = req.body;
 
     // validation
     if (!email) return res.status(400).json({ message: "Please Enter Email" });
@@ -36,10 +37,23 @@ export const signConroller = async (req, res) => {
     if (isUser)
       return res.status(400).json({ message: "Email is already Registered" });
 
-    const userRef = new User({ name, email, password });
+    const userRef = new User({ name, email, password,iAm });
     if (!userRef)
       return res.status(400).json({ message: "Failed To Signing try again" });
-    await userRef.save();
+    const newUser = await userRef.save();
+    
+    if (iAm === "doctor") {
+      const doctorRef = new Doctor({
+        userId: newUser._id,
+        name: name,
+        contact: {
+          email:email,
+        }
+      })
+      
+      await doctorRef.save()
+    };
+
 
     const userWithoutPassword = userRef.toObject();
     delete userWithoutPassword.password;
@@ -212,3 +226,5 @@ export const refreshTokenController = async (req, res) => {
     return res.status(500).json({ message: "server error", error,success:false });
   }
 };
+
+
