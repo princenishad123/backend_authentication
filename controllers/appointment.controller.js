@@ -49,7 +49,7 @@ export const getAppointmentById = async (req, res) => {
         const {id} = req.params;
         // const appointment = await Appointment.find({ userId: id });
        const appointment = await Appointment.find({ userId: id })
-  .populate("userId", "name specialization contact location experience consultationFee") // Doctor Details
+  .populate("doctorId", "name specialization contact location experience consultationFee") // Doctor Details
   .populate("userId", "name email") // User Details
   .exec();
         
